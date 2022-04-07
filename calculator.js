@@ -21,11 +21,46 @@ btn.map(btn =>{
             case 'C':
                 displayScreen.innerText = '';
                 break;
-             case '←':
-                 
+            case '←':
                 displayScreen.innerText = displayScreen.innerText.slice(0,-1);
                 break;    
-
+            case 'x2':
+                displayScreen.innerText = (displayScreen.innerText * displayScreen.innerText);
+                break;  
+            case '√':
+                displayScreen.innerText = Math.sqrt(displayScreen.innerText);
+                break;  
+            case 'π':
+                let pieValue = 3.14159265359
+                displayScreen.innerText += pieValue;
+                break;  
+            case 'log':
+                displayScreen.innerText = Math.log(displayScreen.innerText);
+                break;   
+            case 'sin':
+                displayScreen.innerText = Math.sin(displayScreen.innerText);
+                break;   
+            case 'cos':
+                displayScreen.innerText = Math.cos(displayScreen.innerText);
+                break;
+            case 'tan':
+                displayScreen.innerText = Math.tan(displayScreen.innerText);
+                break;  
+            case '10x':
+                displayScreen.innerText = Math.pow(10,displayScreen.innerText);
+                break;    
+            case 'n!':
+                let ans=1;
+                if(displayScreen.innerText == 0 || displayScreen.innerText == 1){
+                    ans=1;
+                    displayScreen.innerText = ans;
+                }else{
+                    for (let i = displayScreen.innerText; i >= 1; i--) {
+                       ans = ans * i;   
+                    }
+                    displayScreen.innerText = ans;
+                } 
+                break;                
             default:
                 displayScreen.innerText += selectedChar
                 break;
