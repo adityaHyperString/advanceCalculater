@@ -2,19 +2,19 @@
 const displayScreen = document.getElementById('displayScreen');
 const btn = Array.from(document.getElementsByClassName('btn'));
 
-// console.log(btn);
-
+//map function for calling every element from btn array
 btn.map(btn => {
     btn.addEventListener('click', (e) => {
-        // console.log('clicked on', e.target.innerText);
+
         let selectedChar = e.target.innerText.toLowerCase();
+        // switch cases for perticular symbols from calculator
         switch (selectedChar) {
             case '=':
                 try {
                     displayScreen.innerText = eval(displayScreen.innerText);
                 } catch (error) {
                     alert('please enter proper values');
-                    displayScreen.innerText='';
+                    displayScreen.innerText = '';
                 }
                 break;
 
@@ -62,12 +62,17 @@ btn.map(btn => {
                 }
                 break;
             default:
+                //to check whether user is enter valid operations
                 if (displayScreen.innerText == '') {
-                    if(displayScreen.innerText == '/' || displayScreen.innerText == '*' || displayScreen.innerText == '%' || displayScreen.innerText == '√' ){
-                        displayScreen.innerText = '';
+                    if (btn.innerText == '/' || btn.innerText == '*' || btn.innerText == '%') {
+                        alert('please enter value first')
+                    } else {
+
+                        displayScreen.innerText += selectedChar
                     }
+                } else {
+                    displayScreen.innerText += selectedChar
                 }
-                displayScreen.innerText += selectedChar
                 break;
         }
     });
