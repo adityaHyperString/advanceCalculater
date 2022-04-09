@@ -1,19 +1,39 @@
 
 const displayScreen = document.getElementById('displayScreen');
-const btn = Array.from(document.getElementsByClassName('btn'));
-
+const displayScreen1 = document.getElementById('displayScreen1');
+const btn = Array.from(document.getElementsByClassName('btnn'));
+const historyCard = document.getElementById("historyCard");
+const myHistory = document.getElementById('myHistory')
+historyCard.style.display='none';
+var result='';
+var calHistory=[];
 //map function for calling every element from btn array
 btn.map(btn => {
     btn.addEventListener('click', (e) => {
 
-        let selectedChar = e.target.innerText.toLowerCase();
+        let selectedChar = e?.target.innerText.toLowerCase();
         // switch cases for perticular symbols from calculator
         switch (selectedChar) {
             case '=':
                 try {
                     displayScreen.innerText = eval(displayScreen.innerText);
+                    displayScreen1.innerText=result;
+                   
+                    calHistory.push(displayScreen1.innerText)
+                    calHistory.push(displayScreen.innerText)
+                   
                 } catch (error) {
-                    alert('please enter proper values');
+                   
+                    let message = document.getElementById('message');
+                    message.innerHTML = `<div class="alert alert-warning alert-dismissible               fadeshow"role=" alert ">
+                         <p>Please enter proper values</p>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                         </button>
+                      </div>`;
+                    setTimeout(() => {
+                        message.innerHTML = '';
+                    }, 2000);
                     displayScreen.innerText = '';
                 }
                 break;
@@ -65,7 +85,16 @@ btn.map(btn => {
                 //to check whether user is enter valid operations
                 if (displayScreen.innerText == '') {
                     if (btn.innerText == '/' || btn.innerText == '*' || btn.innerText == '%') {
-                        alert('please enter value first')
+                        let message = document.getElementById('message');
+                        message.innerHTML = `<div class="alert alert-warning alert-dismissible fadeshow"role=" alert ">
+                              <p>Please enter number first</p>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>`;
+                        setTimeout(() => {
+                            message.innerHTML = '';
+                        }, 2000);
                     } else {
 
                         displayScreen.innerText += selectedChar
@@ -73,9 +102,74 @@ btn.map(btn => {
                 } else {
                     displayScreen.innerText += selectedChar
                 }
+              
                 break;
         }
+        
+        result= displayScreen.innerText
+       
     });
 });
 
 
+function showHistory() {
+    historyCard.style.display='block'
+    console.log('calHistory',calHistory);
+    let print='';
+    for(let i=0; i<=calHistory.length;i++ ){
+        myHistory.innerHTML= print;
+         print += calHistory[i] +"<br>"
+        
+    }
+}
+
+function closeHistory(){
+    historyCard.style.display='none'
+}
+
+function defaultTheme() {
+   
+    let historyCard = document.getElementById('historyCard');
+    historyCard.style.backgroundColor ='#efa8e4'
+    let body = document.getElementById('body');
+    body.style.backgroundColor = '#2f404f';
+    let calciCard = document.getElementById('calciCard');
+    calciCard.style.backgroundColor ='#d2e2e2'
+    let themeCard = document.getElementById('themeCard')
+    themeCard.style.backgroundColor ='#efa8e4'
+}
+
+function theme1() {
+   
+    let body = document.getElementById('body');
+    body.style.backgroundColor = '#c3b0c4';
+    let calciCard = document.getElementById('calciCard');
+    calciCard.style.backgroundColor ='#edf3f5'
+    let themeCard = document.getElementById('themeCard')
+    themeCard.style.backgroundColor ='#97e5ef'
+    let historyCard = document.getElementById('historyCard');
+    historyCard.style.backgroundColor ='#97e5ef'
+}
+
+function theme2() {
+    let body = document.getElementById('body');
+    body.style.backgroundColor = '#f0f1ee';
+    let calciCard = document.getElementById('calciCard');
+    calciCard.style.backgroundColor ='#a5dbdc'
+    let themeCard = document.getElementById('themeCard')
+    themeCard.style.backgroundColor ='#efa8e4'
+    let historyCard = document.getElementById('historyCard');
+    historyCard.style.backgroundColor ='#efa8e4'
+}
+
+
+function theme3() {
+     let body = document.getElementById('body');
+     body.style.backgroundColor = '#c7dad3';
+    let calciCard = document.getElementById('calciCard');
+    calciCard.style.backgroundColor ='#3f7c88'
+    let themeCard = document.getElementById('themeCard')
+    themeCard.style.backgroundColor ='#f7f7f7'
+    let historyCard = document.getElementById('historyCard');
+    historyCard.style.backgroundColor ='#f7f7f7'
+}
